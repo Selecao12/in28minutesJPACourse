@@ -12,6 +12,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
 
 import javax.persistence.EntityManager;
+import javax.transaction.Transactional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -26,6 +27,7 @@ class StudentRepositoryTests {
     EntityManager em;
 
     @Test
+    @Transactional
     public void retrieveStudentAndPassportDetails() {
         Student student = em.find(Student.class, 20001L);
         logger.info("student -> {}", student);
