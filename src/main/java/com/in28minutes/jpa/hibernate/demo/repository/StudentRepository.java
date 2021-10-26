@@ -39,8 +39,6 @@ public class StudentRepository {
         return student;
     }
 
-
-
     public void saveStudentWithPassport() {
         Passport passport = new Passport("Z312321");
         em.persist(passport);
@@ -49,4 +47,23 @@ public class StudentRepository {
         student.setPassport(passport);
         em.persist(student);
     }
+
+    public void someOpertaionToUnderstandPersistenceContext() {
+        // DB Op1 - Retrieve student
+        Student student = em.find(Student.class, 20001L);
+        // Persistence Context(student)
+
+        // DB Op1 - Retrieve passport
+        Passport passport = student.getPassport();
+        // Persistence Context(student, passport)
+
+        // DB Op1 - Retrieve student
+        passport.setNumber("E123457");
+        // Persistence Context(student, passport++)
+
+        // DB Op1 - Retrieve student
+        student.setName("Range - updated");
+        // Persistence Context(student++, passport)
+    }
+
 }
