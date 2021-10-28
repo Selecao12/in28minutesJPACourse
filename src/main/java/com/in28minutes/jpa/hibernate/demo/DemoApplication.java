@@ -28,7 +28,9 @@ public class DemoApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) {
-        studentRepository.saveStudentWithPassport();
+//        studentRepository.saveStudentWithPassport();
 //        repository.playWithEntityManager();
+
+        courseRepository.addReviewsForCourse();
     }
 }
