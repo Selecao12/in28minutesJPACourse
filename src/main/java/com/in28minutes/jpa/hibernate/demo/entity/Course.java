@@ -25,6 +25,9 @@ public class Course {
     @OneToMany(mappedBy = "course")
     private List<Review> reviews = new ArrayList<>();
 
+    @ManyToMany
+    private List<Student> students = new ArrayList<>();
+
     @UpdateTimestamp
     private LocalDateTime lastUpdatedDate;
 
@@ -40,6 +43,14 @@ public class Course {
 
     public Long getId() {
         return id;
+    }
+
+    public List<Student> getStudents() {
+        return students;
+    }
+
+    public void addStudent(Student student) {
+        this.students.add(student);
     }
 
     public String getName() {
