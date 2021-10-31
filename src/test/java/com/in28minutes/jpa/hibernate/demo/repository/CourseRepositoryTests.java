@@ -2,6 +2,7 @@ package com.in28minutes.jpa.hibernate.demo.repository;
 
 import com.in28minutes.jpa.hibernate.demo.DemoApplication;
 import com.in28minutes.jpa.hibernate.demo.entity.Course;
+import com.in28minutes.jpa.hibernate.demo.entity.Review;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
@@ -9,6 +10,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
+
+import javax.persistence.EntityManager;
+import javax.transaction.Transactional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -18,6 +22,9 @@ class CourseRepositoryTests {
 
     @Autowired
     CourseRepository repository;
+
+    @Autowired
+    EntityManager entityManager;
 
     @Test
     public void findById_basic() {
@@ -50,6 +57,20 @@ class CourseRepositoryTests {
     @DirtiesContext
     public void playWithEntityManager_basic() {
         repository.playWithEntityManager();
+    }
+
+    @Test
+    @Transactional
+    public void retrieveReviewsForCourse() {
+        Course course = repository.findById(10001L);
+        logger.info("course.getReviews() -> {}", course.getReviews());
+    }
+
+    @Test
+    @Transactional
+    public void retrieveCourseForReview() {
+        Review review = entityManager.find(Review.class, 50001L);
+        logger.info("review.getCourse() -> {}", review.getCourse());
     }
 
 }
