@@ -66,4 +66,25 @@ public class StudentRepository {
         // Persistence Context(student++, passport)
     }
 
+    public void insertHardcodedStudentAndCourse() {
+        Student student = new Student("Jack");
+        Course course = new Course("Microservices in 100 Steps");
+        em.persist(student);
+        em.persist(course);
+
+        student.addCourse(course);
+        course.addStudent(student);
+
+        em.persist(student);
+    }
+
+    public void insertStudentAndCourse(Student student, Course course) {
+
+        student.addCourse(course);
+        course.addStudent(student);
+
+        em.persist(student);
+        em.persist(course);
+    }
+
 }
