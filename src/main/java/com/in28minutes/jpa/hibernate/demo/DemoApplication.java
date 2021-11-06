@@ -1,9 +1,7 @@
 package com.in28minutes.jpa.hibernate.demo;
 
-import com.in28minutes.jpa.hibernate.demo.entity.Course;
 import com.in28minutes.jpa.hibernate.demo.entity.FullTimeEmployee;
 import com.in28minutes.jpa.hibernate.demo.entity.PartTimeEmployee;
-import com.in28minutes.jpa.hibernate.demo.entity.Student;
 import com.in28minutes.jpa.hibernate.demo.repository.CourseRepository;
 import com.in28minutes.jpa.hibernate.demo.repository.EmployeeRepository;
 import com.in28minutes.jpa.hibernate.demo.repository.StudentRepository;
@@ -54,6 +52,7 @@ public class DemoApplication implements CommandLineRunner {
         employeeRepository.insert(new PartTimeEmployee("Jill", new BigDecimal("50")));
         employeeRepository.insert(new FullTimeEmployee("Jack", new BigDecimal("10000")));
 
-        logger.info("Employees -> {}", employeeRepository.retrieveAllEmployees());
+        logger.info("Employees -> {}", employeeRepository.retrieveAllPartTimeEmployees());
+        logger.info("Employees -> {}", employeeRepository.retrieveAllFullTimeEmployees());
     }
 }
