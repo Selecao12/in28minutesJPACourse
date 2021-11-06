@@ -87,4 +87,16 @@ public class StudentRepository {
         em.persist(course);
     }
 
+    public void addStudentToCourse(Long courseId, Student student) {
+        em.persist(student);
+        Course course = em.find(Course.class, courseId);
+        student.addCourse(course);
+    }
+
+    public void addCourseToStudent(Long studentId, Course course) {
+        em.persist(course);
+        Student student = em.find(Student.class, studentId);
+        student.addCourse(course);
+    }
+
 }

@@ -43,5 +43,8 @@ public class DemoApplication implements CommandLineRunner {
 
         studentRepository.insertStudentAndCourse(new Student("Jack"),
                 new Course("Microservices in 100 Steps"));
+
+        studentRepository.addCourseToStudent(20001L, new Course("MyCourse"));
+        studentRepository.addStudentToCourse(10001L, new Student("Vitalik"));
     }
 }
