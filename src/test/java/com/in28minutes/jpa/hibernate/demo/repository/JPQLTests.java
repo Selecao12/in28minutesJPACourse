@@ -75,9 +75,43 @@ class JPQLTests {
     @Test
     public void jpql_students_with_passports_in_a_certain_pattern() {
         TypedQuery<Student> query = em.createQuery("select s from Student s where s.passport.number like '%1234%'", Student.class);
-
         List<Student> resultList = query.getResultList();
-
         logger.info("Results -> {}", resultList);
+    }
+
+    //    JOIN => Select c, s from Course c JOIN c.students s
+//    LEFT JOIN => Select c, s from Course c LEFT JOIN c.students s
+//    CROSS JOIN => Select c, s from Course c, Student s
+    @Test
+    public void join() {
+        Query query = em.createQuery("select c, s from Course c join c.students s");
+        List<Object[]> resultList = query.getResultList();
+        logger.info("Results Size -> {}", resultList.size());
+
+        for (Object[] result : resultList) {
+            logger.info("Course {}, Student {}", result[0], result[1]);
+        }
+    }
+
+    @Test
+    public void left_join() {
+        Query query = em.createQuery("select c, s from Course c left join c.students s");
+        List<Object[]> resultList = query.getResultList();
+        logger.info("Results Size -> {}", resultList.size());
+
+        for (Object[] result : resultList) {
+            logger.info("Course {}, Student {}", result[0], result[1]);
+        }
+    }
+
+    @Test
+    public void cross_join() {
+        Query query = em.createQuery("select c, s from Course c, Student s");
+        List<Object[]> resultList = query.getResultList();
+        logger.info("Results Size -> {}", resultList.size());
+
+        for (Object[] result : resultList) {
+            logger.info("Course {}, Student {}", result[0], result[1]);
+        }
     }
 }
