@@ -10,7 +10,7 @@ values (10003, 'Spring Boot in 50 steps', sysdate(), sysdate());
 insert into passport (id, number)
 values (40001, 'E123456');
 insert into passport (id, number)
-values (40002, 'N123573');
+values (40002, 'N123473');
 insert into passport (id, number)
 values (40003, 'L123890');
 
