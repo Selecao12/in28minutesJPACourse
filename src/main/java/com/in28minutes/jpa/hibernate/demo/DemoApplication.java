@@ -49,10 +49,10 @@ public class DemoApplication implements CommandLineRunner {
 //        studentRepository.insertStudentAndCourse(new Student("Jack"),
 //                new Course("Microservices in 100 Steps"));
 
-        employeeRepository.insert(new PartTimeEmployee("Jill", new BigDecimal("50")));
-        employeeRepository.insert(new FullTimeEmployee("Jack", new BigDecimal("10000")));
-
-        logger.info("Employees -> {}", employeeRepository.retrieveAllPartTimeEmployees());
-        logger.info("Employees -> {}", employeeRepository.retrieveAllFullTimeEmployees());
+//        employeeRepository.insert(new PartTimeEmployee("Jill", new BigDecimal("50")));
+//        employeeRepository.insert(new FullTimeEmployee("Jack", new BigDecimal("10000")));
+//
+//        logger.info("Employees -> {}", employeeRepository.retrieveAllPartTimeEmployees());
+//        logger.info("Employees -> {}", employeeRepository.retrieveAllFullTimeEmployees());
     }
 }
