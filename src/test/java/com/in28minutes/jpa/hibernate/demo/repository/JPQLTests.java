@@ -105,6 +105,17 @@ class JPQLTests {
     }
 
     @Test
+    public void join_where() {
+        Query query = em.createQuery("select c, s from Course c left join c.students s");
+        List<Object[]> resultList = query.getResultList();
+        logger.info("Results Size -> {}", resultList.size());
+
+        for (Object[] result : resultList) {
+            logger.info("Course {}, Student {}", result[0], result[1]);
+        }
+    }
+
+    @Test
     public void cross_join() {
         Query query = em.createQuery("select c, s from Course c, Student s");
         List<Object[]> resultList = query.getResultList();

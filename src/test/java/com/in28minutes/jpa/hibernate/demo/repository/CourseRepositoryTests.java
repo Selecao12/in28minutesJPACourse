@@ -10,9 +10,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
-import javax.transaction.Transactional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -30,6 +30,17 @@ class CourseRepositoryTests {
     public void findById_basic() {
         Course course = repository.findById(10001L);
         assertEquals("JPA in 50 steps", course.getName());
+    }
+
+    @Test
+    @Transactional
+    public void findById_firstLevelCacheDemo() {
+        Course course = repository.findById(10001L);
+        logger.info("First Course Retrieve {}", course);
+        Course course1 = repository.findById(10001L);
+        logger.info("First Course Retrieve again {}", course1);
+        assertEquals("JPA in 50 Steps", course.getName());
+        assertEquals("JPA in 50 Steps", course.getName());
     }
 
     @Test
