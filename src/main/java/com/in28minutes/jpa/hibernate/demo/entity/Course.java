@@ -5,6 +5,8 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.hibernate.annotations.Where;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -17,9 +19,11 @@ import java.util.List;
         @NamedQuery(name = "query_get_100_step_course", query = "select c from Course c where name like '%100 steps'")
 })
 @Cacheable
-@SQLDelete(sql="update course set is_deleted=true where id=?")
+@SQLDelete(sql = "update course set is_deleted=true where id=?")
 @Where(clause = "is_deleted = false")
 public class Course {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(Course.class);
 
     @Id
     @GeneratedValue
@@ -43,7 +47,11 @@ public class Course {
 
     private boolean isDeleted;
 
-
+    @PreRemove
+    private void preRemove() {
+        LOGGER.info("Setting is deleted");
+        this.isDeleted = true;
+    }
 
     protected Course() {
     }
