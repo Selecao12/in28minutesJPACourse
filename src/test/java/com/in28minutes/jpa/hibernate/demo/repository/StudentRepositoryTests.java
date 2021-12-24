@@ -1,6 +1,7 @@
 package com.in28minutes.jpa.hibernate.demo.repository;
 
 import com.in28minutes.jpa.hibernate.demo.DemoApplication;
+import com.in28minutes.jpa.hibernate.demo.entity.Address;
 import com.in28minutes.jpa.hibernate.demo.entity.Passport;
 import com.in28minutes.jpa.hibernate.demo.entity.Student;
 import org.junit.jupiter.api.Test;
@@ -31,6 +32,16 @@ class StudentRepositoryTests {
     @Transactional
     public void retrieveStudentAndPassportDetails() {
         Student student = em.find(Student.class, 20001L);
+        logger.info("student -> {}", student);
+        logger.info("passport -> {}", student.getPassport());
+    }
+
+    @Test
+    @Transactional
+    public void setAddressDetails() {
+        Student student = em.find(Student.class, 20001L);
+        student.setAddress(new Address("line1", "line2", "Orenburg"));
+        em.flush();
         logger.info("student -> {}", student);
         logger.info("passport -> {}", student.getPassport());
     }
