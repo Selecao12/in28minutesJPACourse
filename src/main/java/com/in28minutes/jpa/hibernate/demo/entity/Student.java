@@ -18,6 +18,9 @@ public class Student {
     @Column(nullable = false)
     private String name;
 
+    @Embedded
+    private Address address;
+
     @OneToOne(fetch = FetchType.LAZY)
     private Passport passport;
 
@@ -67,5 +70,13 @@ public class Student {
     @Override
     public String toString() {
         return String.format("Student[%s]", name);
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
     }
 }
